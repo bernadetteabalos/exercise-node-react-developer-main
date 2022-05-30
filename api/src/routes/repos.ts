@@ -26,11 +26,6 @@ repos.get('/', async (_: Request, res: Response) => {
   });
   fullData = fullData.concat(results);
   // TODO: See README.md Task (A). Return repo data here. You’ve got this!
-  const filteredData = [];
-  for (const item of fullData) {
-    if (item.fork === false) {
-      filteredData.push(item);
-    }
-  }
-  return res.json(filteredData);
+  const result = fullData.filter((item) => item.fork === false);
+  res.json(result);
 });
