@@ -17,13 +17,20 @@ const getData = () => {
 export const repos = Router();
 
 repos.get('/', async (_: Request, res: Response) => {
+  let fullData = data;
   res.header('Cache-Control', 'no-store');
 
   res.status(200);
   const results = await getData().then((resp) => {
     return resp;
   });
+  fullData = fullData.concat(results);
   // TODO: See README.md Task (A). Return repo data here. You’ve got this!
-
-  res.json(results);
+  const filteredData = [];
+  for (const item of fullData) {
+    if (item.fork === false) {
+      filteredData.push(item);
+    }
+  }
+  return res.json(filteredData);
 });
