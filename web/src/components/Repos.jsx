@@ -28,7 +28,14 @@ const Repos = () => {
   return (
     <div>
       <h1>Fetched Data</h1>
-
+      {languages.map((language) => (
+        <button
+          key={language}
+          onClick={() => (selected ? setSelected() : setSelected(language))}
+        >
+          {language}
+        </button>
+      ))}
       <ul>
         {data
           .filter((repo) => (selected ? repo.language === selected : true))
